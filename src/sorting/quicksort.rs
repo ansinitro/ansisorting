@@ -1,12 +1,12 @@
-pub fn quicksort<T, F>(arr: &mut [T], compare: &F)
+pub fn quick_sort<T, F>(arr: &mut [T], compare: &F)
 where
     T: PartialOrd,
     F: Fn(&T, &T) -> bool,
 {
     if arr.len() > 1 {
         let pivot_index = partition(arr, compare);
-        quicksort(&mut arr[0..pivot_index], compare);
-        quicksort(&mut arr[pivot_index + 1..], compare);
+        quick_sort(&mut arr[0..pivot_index], compare);
+        quick_sort(&mut arr[pivot_index + 1..], compare);
     }
 }
 
@@ -33,58 +33,58 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_quicksort_empty() {
+    fn test_quick_sort_empty() {
         let mut vec: Vec<i32> = vec![];
-        quicksort(&mut vec, &|a, b| a < b);
+        quick_sort(&mut vec, &|a, b| a < b);
         assert_eq!(vec, []);
     }
 
     #[test]
-    fn test_quicksort_single_element() {
+    fn test_quick_sort_single_element() {
         let mut vec = vec![42];
-        quicksort(&mut vec, &|a, b| a < b);
+        quick_sort(&mut vec, &|a, b| a < b);
         assert_eq!(vec, [42]);
     }
 
     #[test]
-    fn test_quicksort_sorted() {
+    fn test_quick_sort_sorted() {
         let mut vec = vec![1, 2, 3, 4, 5];
-        quicksort(&mut vec, &|a, b| a < b);
+        quick_sort(&mut vec, &|a, b| a < b);
         assert_eq!(vec, [1, 2, 3, 4, 5]);
     }
 
     #[test]
-    fn test_quicksort_reverse_sorted() {
+    fn test_quick_sort_reverse_sorted() {
         let mut vec = vec![5, 4, 3, 2, 1];
-        quicksort(&mut vec, &|a, b| a < b);
+        quick_sort(&mut vec, &|a, b| a < b);
         assert_eq!(vec, [1, 2, 3, 4, 5]);
     }
 
     #[test]
-    fn test_quicksort_random() {
+    fn test_quick_sort_random() {
         let mut vec = vec![3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
-        quicksort(&mut vec, &|a, b| a < b);
+        quick_sort(&mut vec, &|a, b| a < b);
         assert_eq!(vec, [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]);
     }
 
     #[test]
-    fn test_quicksort_duplicate_elements() {
+    fn test_quick_sort_duplicate_elements() {
         let mut vec = vec![5, 2, 5, 3, 1, 2];
-        quicksort(&mut vec, &|a, b| a < b);
+        quick_sort(&mut vec, &|a, b| a < b);
         assert_eq!(vec, [1, 2, 2, 3, 5, 5]);
     }
 
     #[test]
-    fn test_quicksort_negative_numbers() {
+    fn test_quick_sort_negative_numbers() {
         let mut vec = vec![-5, -2, -4, -1, -3];
-        quicksort(&mut vec, &|a, b| a < b);
+        quick_sort(&mut vec, &|a, b| a < b);
         assert_eq!(vec, [-5, -4, -3, -2, -1]);
     }
 
     #[test]
-    fn test_quicksort_large_input() {
+    fn test_quick_sort_large_input() {
         let mut vec = (1..=1000).rev().collect::<Vec<i32>>();
-        quicksort(&mut vec, &|a, b| a < b);
+        quick_sort(&mut vec, &|a, b| a < b);
         assert_eq!(vec, (1..=1000).collect::<Vec<i32>>());
     }
 
@@ -95,7 +95,7 @@ mod tests {
     }
 
     #[test]
-    fn test_quicksort_sorted_person() {
+    fn test_quick_sort_sorted_person() {
         let mut vec = vec![
             Person {
                 name: "Alice".to_string(),
@@ -110,7 +110,7 @@ mod tests {
                 age: 30,
             },
         ];
-        quicksort(&mut vec, &|a, b| a.age < b.age);
+        quick_sort(&mut vec, &|a, b| a.age < b.age);
         assert_eq!(
             vec,
             vec![
@@ -131,7 +131,7 @@ mod tests {
     }
 
     #[test]
-    fn test_quicksort_random_person() {
+    fn test_quick_sort_random_person() {
         let mut vec = vec![
             Person {
                 name: "Alice".to_string(),
@@ -150,7 +150,7 @@ mod tests {
                 age: 20,
             },
         ];
-        quicksort(&mut vec, &|a, b| a.age < b.age);
+        quick_sort(&mut vec, &|a, b| a.age < b.age);
         assert_eq!(
             vec,
             vec![
