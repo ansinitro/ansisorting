@@ -88,42 +88,89 @@ mod tests {
         assert_eq!(vec, (1..=1000).collect::<Vec<i32>>());
     }
 
-#[derive(Debug, PartialEq, PartialOrd)]
+    #[derive(Debug, PartialEq, PartialOrd)]
     struct Person {
-    name: String,
-    age: u32,
-}
+        name: String,
+        age: u32,
+    }
 
-#[test]
-fn test_quicksort_sorted_person() {
-    let mut vec = vec![
-        Person { name: "Alice".to_string(), age: 20 },
-        Person { name: "Bob".to_string(), age: 25 },
-        Person { name: "Charlie".to_string(), age: 30 },
-    ];
-    quicksort(&mut vec, &|a, b| a.age < b.age);
-    assert_eq!(vec, vec![
-        Person { name: "Alice".to_string(), age: 20 },
-        Person { name: "Bob".to_string(), age: 25 },
-        Person { name: "Charlie".to_string(), age: 30 },
-    ]);
-}
+    #[test]
+    fn test_quicksort_sorted_person() {
+        let mut vec = vec![
+            Person {
+                name: "Alice".to_string(),
+                age: 20,
+            },
+            Person {
+                name: "Bob".to_string(),
+                age: 25,
+            },
+            Person {
+                name: "Charlie".to_string(),
+                age: 30,
+            },
+        ];
+        quicksort(&mut vec, &|a, b| a.age < b.age);
+        assert_eq!(
+            vec,
+            vec![
+                Person {
+                    name: "Alice".to_string(),
+                    age: 20
+                },
+                Person {
+                    name: "Bob".to_string(),
+                    age: 25
+                },
+                Person {
+                    name: "Charlie".to_string(),
+                    age: 30
+                },
+            ]
+        );
+    }
 
-#[test]
-fn test_quicksort_random_person() {
-    let mut vec = vec![
-        Person { name: "Alice".to_string(), age: 30 },
-        Person { name: "Bob".to_string(), age: 25 },
-        Person { name: "Charlie".to_string(), age: 35 },
-        Person { name: "David".to_string(), age: 20 },
-    ];
-    quicksort(&mut vec, &|a, b| a.age < b.age);
-    assert_eq!(vec, vec![
-        Person { name: "David".to_string(), age: 20 },
-        Person { name: "Bob".to_string(), age: 25 },
-        Person { name: "Alice".to_string(), age: 30 },
-        Person { name: "Charlie".to_string(), age: 35 },
-    ]);
-}
-
+    #[test]
+    fn test_quicksort_random_person() {
+        let mut vec = vec![
+            Person {
+                name: "Alice".to_string(),
+                age: 30,
+            },
+            Person {
+                name: "Bob".to_string(),
+                age: 25,
+            },
+            Person {
+                name: "Charlie".to_string(),
+                age: 35,
+            },
+            Person {
+                name: "David".to_string(),
+                age: 20,
+            },
+        ];
+        quicksort(&mut vec, &|a, b| a.age < b.age);
+        assert_eq!(
+            vec,
+            vec![
+                Person {
+                    name: "David".to_string(),
+                    age: 20
+                },
+                Person {
+                    name: "Bob".to_string(),
+                    age: 25
+                },
+                Person {
+                    name: "Alice".to_string(),
+                    age: 30
+                },
+                Person {
+                    name: "Charlie".to_string(),
+                    age: 35
+                },
+            ]
+        );
+    }
 }
